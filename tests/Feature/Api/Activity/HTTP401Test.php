@@ -8,39 +8,36 @@ uses()->group('activity-api-401');
 uses()->group('api-401');
 
 describe('401', function (): void {
-    test('index api', apiTest(
-        'GET',
-        'activity-log.index',
-        401,
-        null,
-        ['message'],
-        ['message' => 'Unauthenticated.']
-    ));
-
-    test('countByCreatedLastWeek api', apiTest(
-        'GET',
-        'activity-log.countByCreatedLastWeek',
-        401,
-        null,
-        ['message'],
-        ['message' => 'Unauthenticated.']
-    ));
-
-    test('show api', apiTest(
-        'SHOW',
-        'activity-log.show',
-        401,
-        1,
-        ['message'],
-        ['message' => 'Unauthenticated.']
-    ));
-
-    test('destroy api', apiTest(
-        'DELETE',
-        'activity-log.destroy',
-        401,
-        null,
-        ['message'],
-        ['message' => 'Unauthenticated.']
-    ));
+    apiTestArray([
+        'index api' => [
+            'method' => 'GET',
+            'route' => 'activity-log.index',
+            'status' => 401,
+            'structure' => ['message'],
+            'fragment' => ['message' => 'Unauthenticated.'],
+        ],
+        'countByCreatedLastWeek api' => [
+            'method' => 'GET',
+            'route' => 'activity-log.countByCreatedLastWeek',
+            'status' => 401,
+            'structure' => ['message'],
+            'fragment' => ['message' => 'Unauthenticated.'],
+        ],
+        'show api' => [
+            'method' => 'SHOW',
+            'route' => 'activity-log.show',
+            'status' => 401,
+            'id' => 1,
+            'structure' => ['message'],
+            'fragment' => ['message' => 'Unauthenticated.'],
+        ],
+        'destroy api' => [
+            'method' => 'DELETE',
+            'route' => 'activity-log.destroy',
+            'status' => 401,
+            'id' => 1,
+            'structure' => ['message'],
+            'fragment' => ['message' => 'Unauthenticated.'],
+        ],
+    ]);
 });
